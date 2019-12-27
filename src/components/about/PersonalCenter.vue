@@ -21,7 +21,7 @@
                         教师管理
                     </template>
                     <MenuItem name="1-1" to="/about/TeacherManagement">添加教师</MenuItem>
-                    <MenuItem name="1-2" to="/about/StudentManagement">教师列表</MenuItem>
+                    <MenuItem name="1-2" to="/about/TeacherManagementList">教师列表</MenuItem>
                 </Submenu>
 
 
@@ -30,8 +30,8 @@
                         <Icon type="ios-people"/>
                         课程管理
                     </template>
-                    <MenuItem name="2-1" to="/about/ModifyingPersonalInformation">添加课程</MenuItem>
-                    <MenuItem name="2-2" to="/about/ModifyingPersonalInformation">添加列表</MenuItem>
+                    <MenuItem name="2-1" to="/about/Addthecourse">添加课程</MenuItem>
+                    <MenuItem name="2-2" to="/about/CourseList">添加列表</MenuItem>
                 </Submenu>
 
 
@@ -40,8 +40,8 @@
                         <Icon type="ios-stats"/>
                         学生管理
                     </template>
-                    <MenuItem name="3-1">添加学生</MenuItem>
-                    <MenuItem name="3-2">学生列表</MenuItem>
+                    <MenuItem name="3-1" to="/about/AddStudent">添加学生</MenuItem>
+                    <MenuItem name="3-2" to="/about/StudentList">学生列表</MenuItem>
                 </Submenu>
 
                 <Submenu name="4">
@@ -143,7 +143,7 @@
 <style scoped lang="scss">
 
     .PersonalCenter {
-        max-width: 1250px;
+        max-width: 1280px;
         margin: 0 auto;
     }
 
@@ -156,10 +156,11 @@
         display: flex;
     }
 
+
     .sonrouter {
         width: 100%;
         height: 100%;
-        text-align: center;
+        /*text-align: center;*/
     }
 
 

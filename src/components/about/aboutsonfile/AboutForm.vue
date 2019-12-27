@@ -19,6 +19,8 @@
                     <Input v-model="formValidate.password" placeholder="Enter your password" autocomplete
                            icon="md-key"/>
                 </FormItem>
+
+
                 <FormItem>
                     <Button type="info" @click="handleSubmit('formValidate')">修改</Button>
                     <Button @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
