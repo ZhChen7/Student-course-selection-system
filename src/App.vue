@@ -3,7 +3,7 @@
 
     <div id="nav">
       <router-link to="/">LOGIN</router-link> |
-      <router-link v-if="ISshow" to="/about/ModifyingPersonalInformation">个人中心</router-link>
+      <router-link v-if="ISshow" to="/about">个人中心</router-link>
       <span v-if="!ISshow" :class="['flow-wave','text']"> 你敢登录吗？</span>
     </div>
 
@@ -20,7 +20,8 @@
     name:'App',
     provide(){
         return{
-          showsome:this.showsome
+          showsome:this.showsome,
+          hidesome:this.hidesome
         }
     },
     data(){
@@ -31,6 +32,9 @@
     methods:{
       showsome(){
         this.ISshow = true
+      },
+      hidesome(){
+        this.ISshow = false
       }
     }
   }

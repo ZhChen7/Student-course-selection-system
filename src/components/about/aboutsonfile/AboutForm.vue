@@ -6,7 +6,7 @@
                   label-colon="：">
 
                 <FormItem label="编号" prop="number">
-                    <Input v-model="formValidate.number"  placeholder="Enter your number" autocomplete
+                    <Input v-model="formValidate.number" placeholder="Enter your number" autocomplete
                            maxlength="10" disabled/>
                 </FormItem>
 
@@ -36,13 +36,14 @@
   export default {
     name: "AboutForm",
     props: ["user"],
-    inject:['reload'],
+    inject: ["reload"],
     data() {
       return {
         formValidate: {
-          number:1,
+          number: 1,
           name: "",
-          password: ""
+          password: "",
+          identity: ""
         },
         ruleValidate: {
           name: [
@@ -57,17 +58,32 @@
       };
     },
     watch: {
-      'user': function (val) {//监听props中的属性
-        this.formValidate.number = val.ano;
-        this.formValidate.name = val.loginname;
+      "user": function(val) {//监听props中的属性
+        if (val.identity === "老师") {
+          this.formValidate.number = val.tno;
+          this.formValidate.name = val.loginname;
+        } else if (val.identity === "管理员") {
+          this.formValidate.number = val.ano;
+          this.formValidate.name = val.loginname;
+        } else {
+          this.formValidate.number = val.sno;
+          this.formValidate.name = val.sname;
+        }
+
+
         this.formValidate.password = val.pwd;
+
+
+
+        this.formValidate.identity = val.identity;
+
       }
     },
-      mounted(){
+    mounted() {
       // this.formValidate.number = this.user.ano
       // this.formValidate.name = this.user.loginname
       // this.formValidate.password = this.user.pwd
-      console.log('xxx')
+      console.log("xxx");
 
     },
     methods: {
@@ -76,12 +92,7 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
 
-            // if(this.formValidate.name ===this.user.loginname && this.formValidate.password ===this.user.pwd){
-            //   this.$Message.warning("不改你修改个啥! 🤔");
-            //   return
-            // }
-
-            this.getHomeInfo(this.user.ano,this.formValidate.name,this.formValidate.password)
+            this.getHomeInfo(this.formValidate.number, this.formValidate.name, this.formValidate.password, this.formValidate.identity);
 
 
           } else {
@@ -94,26 +105,26 @@
         this.$refs[name].resetFields();
       },
 
-      getHomeInfo(ano,name,pwd){
+      getHomeInfo(ano, name, pwd, identity) {
 
+        let obj = {
+          ano: ano,
+          name: name,
+          password: pwd,
+          identity: identity
+        };
 
-        let obj={
-          ano:ano,
-          name:name,
-          password:pwd
-        }
+        console.log(obj);
 
-        axios.post('/api/fix',obj)
-          .then((res) =>this.getHomeInfoSucc(res))
+        axios.post("/api/fix", obj)
+          .then((res) => this.getHomeInfoSucc(res));
       },
-      getHomeInfoSucc(res){
-        console.log(res)
+      getHomeInfoSucc(res) {
 
-
-        if(res.data.message === 'OK'){
-           this.$Message.success("修改成功!");
-          this.$emit('my-event',this.formValidate.name)
-            this.reload()
+        if (res.data.message === "OK") {
+          this.$Message.success("修改成功!");
+          this.$emit("my-event", this.formValidate.name);
+          this.reload();
         }
 
       }

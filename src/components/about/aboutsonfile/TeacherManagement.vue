@@ -117,6 +117,7 @@
       handleReset(name) {
         this.$refs[name].resetFields();
       },
+      //
       getHomeInfo() {
         let obj={
           username:this.formValidate.username,
@@ -124,7 +125,7 @@
           password:this.formValidate.password,
           contactway:this.formValidate.contactway,
           mail:this.formValidate.mail,
-          data:this.formValidate.date +'-'+this.formValidate.time,
+          data:this.formValidate.date,
           desc:this.formValidate.desc
         }
         axios.post("/api/Addteacherdata",obj)
@@ -133,9 +134,9 @@
       getHomeInfoSucc(res) {
         if (res.data) {
           this.$Message.success("Success!");
-          console.log(res.data)
+          this.$router.push({ path: "/about/TeacherManagementList" });
         }
-      },
+      }
 
 
 

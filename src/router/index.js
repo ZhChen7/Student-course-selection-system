@@ -11,6 +11,13 @@ import CourseList from "../components/about/aboutsonfile/CourseList.vue";
 import AddStudent from "../components/about/aboutsonfile/AddStudent.vue";
 import StudentList from "../components/about/aboutsonfile/StudentList.vue";
 
+import EditInfoTeacher from "../components/about/aboutsonfile/EditInfoTeacher.vue";
+import TeacherTeaches from "../components/about/aboutsonfile/TeacherTeaches.vue";
+
+import EditInfostudent from "../components/about/aboutsonfile/EditInfostudent.vue";
+import studentscourseselection from "../components/about/aboutsonfile/studentscourseselection.vue";
+import StudentTheselectedcourse from "../components/about/aboutsonfile/StudentTheselectedcourse.vue";
+
 
 
 Vue.use(VueRouter);
@@ -74,7 +81,39 @@ const routes = [
         // UserPosts 会被渲染在 User 的 <router-view> 中
         path: 'StudentList',
         component: StudentList
+      },
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'EditInfoTeacher',
+        component: EditInfoTeacher
+      },
+
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'TeacherTeaches',
+        component: TeacherTeaches
+      },
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'EditInfostudent',
+        component: EditInfostudent
+      },
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'studentscourseselection',
+        component: studentscourseselection
+      },
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'StudentTheselectedcourse',
+        component: StudentTheselectedcourse
       }
+
     ]
   }
 ];

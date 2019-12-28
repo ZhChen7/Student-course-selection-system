@@ -5,7 +5,7 @@
                 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
                     <Divider>课程信息录入</Divider>
                     <FormItem label="课程名称" prop="coursetitle">
-                        <Input v-model="formValidate.coursetitle" placeholder="Enter your coursetitle" show-word-limit maxlength="8"/>
+                        <Input v-model="formValidate.coursetitle" placeholder="Enter your coursetitle" show-word-limit maxlength="12"/>
                     </FormItem>
 
                     <FormItem label="学分" prop="credit">
@@ -44,9 +44,9 @@
 
                     <FormItem label="授课教师" prop="GiveLessonsTeacher">
                         <Select v-model="formValidate.GiveLessonsTeacher" placeholder="Select your GiveLessonsTeacher">
-                            <Option value="beijing">王希文</Option>
-                            <Option value="shanghai">刘宇</Option>
-                            <Option value="shenzhen">马超</Option>
+                            <Option value="王希文">王希文</Option>
+                            <Option value="刘宇">刘宇</Option>
+                            <Option value="马超">马超</Option>
                         </Select>
                     </FormItem>
 
@@ -62,6 +62,9 @@
 </template>
 
 <script>
+
+  import axios from "axios";
+
   export default {
     name: "Addthecourse",
     data() {
@@ -107,7 +110,7 @@
       handleSubmit(credit) {
         this.$refs[credit].validate((valid) => {
           if (valid) {
-            this.$Message.success("Success!");
+            this.getHomeInfo()
           } else {
             this.$Message.error("Fail!");
           }
@@ -115,7 +118,32 @@
       },
       handleReset(credit) {
         this.$refs[credit].resetFields();
+      },
+
+      getHomeInfo() {
+        let obj={
+          coursetitle:this.formValidate.coursetitle,
+          credit:this.formValidate.credit,
+          beginsdate:this.formValidate.beginsdate,
+          endsdate:this.formValidate.endsdate,
+          GiveLessonsTeacher:this.formValidate.GiveLessonsTeacher
+        }
+
+        axios.post("/api/AddteacherAndCourse",obj)
+          .then((res) => this.getHomeInfoSucc(res));
+      },
+
+      getHomeInfoSucc(res) {
+
+        console.log(res.data)
+
+        if (res.data) {
+          this.$Message.success("增加课程成功!");
+          this.$router.push({ path: "/about/CourseList" });
+        }
+
       }
+
     }
   };
 </script>

@@ -111,14 +111,27 @@
         if (res.data) {
           if (res.data.result === "error") {
             this.$Message.error("账号或密码错误!");
-            // this.formValidate.password =''
 
           }else if( res.data.result=== 'NotAdministrator'){
             this.$Message.error("you不是管理员，go out！");
           }else {
             this.$Message.success("Success!");
             this.showsome()
-            this.$router.push({ path: "/about/ModifyingPersonalInformation" });
+
+
+            console.log(res.data)
+
+            console.log(res.data.data1.identity)
+
+
+            if(res.data.data1.identity ==="老师"){
+              this.$router.push({ path: "/about/EditInfoTeacher" });
+            }else if(res.data.data1.identity ==="管理员"){
+              this.$router.push({ path: "/about/ModifyingPersonalInformation" });
+            }else{
+              this.$router.push({ path: "/about/EditInfostudent" });
+            }
+
           }
         }
       }
