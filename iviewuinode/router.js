@@ -210,21 +210,20 @@ router.get('/showtable', function (req, res, next) {
 // 取出教师所有数据
 router.get('/teacherdata', function (req, res, next) {
 
-    // let offset=0
-    // let pagesize=0
-
-
     let offset= parseInt(req.query.offset)
     let pagesize= parseInt(req.query.pageSize)
 
-
     db.query('select * from t_teacher limit ?,?', [offset,pagesize], function (result, fields) {
+        db.query('select * from t_teacher', [offset,pagesize], function (results, fields) {
 
-        return res.status(200).json({
-            err_code: 0,
-            message: 'OK',
-            result: result
-        })
+            return res.status(200).json({
+                err_code: 0,
+                message: 'OK',
+                result: result,
+                total:results.length
+            })
+        });
+
     });
 })
 
@@ -597,6 +596,81 @@ router.get('/TeacherFindCourse', function (req, res, next) {
 })
 
 
+//学生可选课程
+
+router.get('/Studentoptionalcourses', function (req, res, next) {
+
+
+    let sno= req.session.user.sno
+    let selectsql1 = 'select * from  t_student_course t WHERE t.sno = ?'
+    db.query(selectsql1, [sno], function (result, fields) {
+
+        let cnoarr=[]
+        result.forEach(function (value) {
+            cnoarr.push(value.cno)
+        })
+        let selectsql = 'select * from  t_course c,t_teacher t WHERE c.tno = t.tno'
+        db.query(selectsql, [], function (result, fields) {
+           let newresult=[]
+            result.forEach(function (value) {
+                    if(cnoarr.indexOf(value.cno)<0){
+                        newresult.push(value)
+                    }
+            })
+            return res.status(200).json({
+                err_code: 0,
+                message: 'OK',
+                result: newresult
+            })
+        });
+
+    });
+
+})
+
+
+//提交学生可选课程
+router.post('/StudentAddCourse', function (req, res, next) {
+
+    console.log(req.body.selectarr)
+
+    let sno= parseInt(req.session.user.sno)
+    let length=req.body.selectarr.length
+    let newarr=[]
+    for (let i = 0; i < length; i++) {
+        let startcno =parseInt(req.body.selectarr[i].cno)
+         newarr.push([sno,startcno])
+    }
+
+    let addSql = 'INSERT INTO t_student_course(sno,cno) VALUES ?';
+    db.query(addSql, [newarr], function (result, fields) {
+        console.log('添加成功')
+        return res.status(200).json({
+            err_code: 0,
+            message: 'OK'
+        })
+    })
+
+})
+
+
+
+
+//学生已选课程
+router.get('/Studentalreadyoptionalcourses', function (req, res, next) {
+
+    let sno= req.session.user.sno
+    let selectsql = 'select * from  t_student_course s,t_course c,t_teacher t WHERE s.cno = c.cno And c.tno = t.tno AND s.sno = ?'
+    db.query(selectsql, [sno], function (result, fields) {
+
+        return res.status(200).json({
+            err_code: 0,
+            message: 'OK',
+            result: result
+        })
+    });
+
+})
 
 
 

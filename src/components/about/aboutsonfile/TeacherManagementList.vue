@@ -43,7 +43,6 @@
                     <span v-else>{{ row.remark }}</span>
                 </template>
 
-
                 <template slot-scope="{ row, index }" slot="action">
                     <div>
                         <div v-if="editIndex === index" class="templateBtn">
@@ -55,10 +54,7 @@
                             <Button type="error" size="small" @click="DeleteEdit(row, index)">删除</Button>
                         </div>
                     </div>
-
                 </template>
-
-
             </Table>
         </div>
 
@@ -125,12 +121,7 @@
       this.getHomeInfo();
     },
     methods: {
-
-
       getHomeInfo() {
-
-
-
         axios.get("/api/teacherdata?pageSize="+this.pageSize+"&offset="+this.pageSize *(this.pageCurrent-1))
           .then((res) => this.getHomeInfoSucc(res));
 
@@ -139,8 +130,8 @@
         console.log(res.data);
 
         if (res.data) {
-          this.data = res.data.result;
-
+          this.data = res.data.result
+          this.total=res.data.total
         }
       },
 
@@ -151,7 +142,6 @@
           .then((res) => {
             if (res.data) {
               this.data = res.data.result;
-
             }
           });
 
@@ -242,6 +232,7 @@
     .TeacherManagementListDiv {
         text-align: center;
         padding: 0 15px;
+        min-height:276px ;
     }
 
     .TeacherManagementListPage {
