@@ -2,6 +2,7 @@
     <div class="home">
 
 
+
         <div class="LoginForm">
             <Divider>登录</Divider>
 
@@ -25,8 +26,8 @@
                 <FormItem label="identity" prop="identity">
                     <RadioGroup v-model="formValidate.identity">
                         <Radio label="Administrator">管理员</Radio>
-                        <Radio label="student">学生</Radio>
                         <Radio label="teacher">教师</Radio>
+                        <Radio label="student">学生</Radio>
                     </RadioGroup>
                 </FormItem>
 
@@ -127,7 +128,7 @@
             if(res.data.data1.identity ==="老师"){
               this.$router.push({ path: "/about/EditInfoTeacher" });
             }else if(res.data.data1.identity ==="管理员"){
-              this.$router.push({ path: "/about/ModifyingPersonalInformation" });
+              this.$router.push({ path: "/about/TeacherManagementList" });
             }else{
               this.$router.push({ path: "/about/EditInfostudent" });
             }

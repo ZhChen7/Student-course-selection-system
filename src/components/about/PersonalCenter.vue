@@ -37,7 +37,7 @@
                 </Submenu>
 
 
-                <Submenu name="3" v-if="Isidentity">
+                <Submenu name="3" v-if="identityAndteacher">
                     <template slot="title">
                         <Icon type="ios-stats"/>
                         学生管理
@@ -110,7 +110,8 @@
         user:'',
         Isidentity:false,
         Isteacher:false,
-        Isstudent:false
+        Isstudent:false,
+        identityAndteacher:false
       }
     },
     watch: {
@@ -135,8 +136,10 @@
 
           if(res.data.user.identity === "管理员"){
                 this.Isidentity = true
+                this.identityAndteacher = true
                 this.user =  res.data.user
           }else if(res.data.user.identity === "老师"){
+               this.identityAndteacher = true
                 this.Isteacher = true
                 this.user =  res.data.user
           }else{

@@ -3,6 +3,13 @@
 
         <div class="addBtn">
             <Button type="dashed" to="/about/TeacherManagement">添加教师信息</Button>
+
+            <div class="Selectsearch">
+                <Select v-model="model1"  filterable prefix="ios-home" clearable  style="width:200px" @on-change="Selectsearchchange">
+                    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+            </div>
+
         </div>
 
         <Divider>教师列表</Divider>
@@ -76,7 +83,8 @@
         columns: [
           {
             title: "编号",
-            slot: "ano"
+            slot: "ano",
+            sortable: true
           },
           {
             title: "姓名",
@@ -114,7 +122,34 @@
 
         total:50,
         pageSize:5,
-        pageCurrent:1
+        pageCurrent:1,
+        cityList: [
+          {
+            value: 'New York',
+            label: 'New York'
+          },
+          {
+            value: 'London',
+            label: 'London'
+          },
+          {
+            value: 'Sydney',
+            label: 'Sydney'
+          },
+          {
+            value: 'Ottawa',
+            label: 'Ottawa'
+          },
+          {
+            value: 'Paris',
+            label: 'Paris'
+          },
+          {
+            value: 'Canberra',
+            label: 'Canberra'
+          }
+        ],
+        model1: ''
       };
     },
     mounted() {
@@ -129,11 +164,30 @@
       getHomeInfoSucc(res) {
         console.log(res.data);
 
+        let newarr=[]
+        res.data.result.forEach(value=>{
+          newarr.push({value:value.tname,label:value.tname})
+        })
+        this.cityList = newarr
+
         if (res.data) {
           this.data = res.data.result
           this.total=res.data.total
         }
       },
+
+      Selectsearchchange(){
+        if(this.model1){
+          let newarr=this.data.filter(value => {
+            return value.tname === this.model1
+          })
+          this.data =  newarr
+        }else{
+            this.getHomeInfo()
+        }
+
+      },
+
 
 
       onChangetable(e){
@@ -248,6 +302,15 @@
     .templateBtn {
         display: flex;
         justify-content: space-around;
+    }
+
+    .addBtn{
+        /*border: 1px solid red;*/
+        display: flex;
+        justify-content: space-around;
+    }
+    .Selectsearch{
+        /*border: 1px solid black;*/
     }
 
 </style>

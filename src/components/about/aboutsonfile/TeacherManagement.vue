@@ -5,11 +5,13 @@
                 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
                     <Divider>教师信息录入</Divider>
                     <FormItem label="用户名" prop="username">
-                        <Input v-model="formValidate.username" placeholder="Enter your username" show-word-limit maxlength="8"/>
+                        <Input v-model="formValidate.username" placeholder="Enter your username" show-word-limit
+                               maxlength="8"/>
                     </FormItem>
 
                     <FormItem label="姓名" prop="name">
-                        <Input v-model="formValidate.name" placeholder="Enter your name " show-word-limit maxlength="4"/>
+                        <Input v-model="formValidate.name" placeholder="Enter your name " show-word-limit
+                               maxlength="4"/>
                     </FormItem>
 
 
@@ -27,19 +29,18 @@
                     </FormItem>
 
                     <FormItem label="入职时间">
-                         <div class="TeacherManagementDate">
-                             <FormItem prop="date">
-                                 <DatePicker type="date" placeholder="Select date"
-                                             v-model="formValidate.date"></DatePicker>
-                             </FormItem>
-                             -
-                             <FormItem prop="time">
-                                 <TimePicker type="time" placeholder="Select time"
-                                             v-model="formValidate.time"></TimePicker>
-                             </FormItem>
-                         </div>
+                        <div class="TeacherManagementDate">
+                            <FormItem prop="date">
+                                <DatePicker type="date" placeholder="Select date"
+                                            v-model="formValidate.date"></DatePicker>
+                            </FormItem>
+                            -
+                            <FormItem prop="time">
+                                <TimePicker type="time" placeholder="Select time"
+                                            v-model="formValidate.time"></TimePicker>
+                            </FormItem>
+                        </div>
                     </FormItem>
-
 
 
                     <FormItem label="描述" prop="desc">
@@ -67,9 +68,9 @@
       return {
         formValidate: {
           username: "",
-          name:'',
-          password:'',
-          contactway:'',
+          name: "",
+          password: "",
+          contactway: "",
           mail: "",
           date: "",
           time: "",
@@ -106,29 +107,29 @@
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.getHomeInfo()
+            this.getHomeInfo();
 
 
           } else {
             this.$Message.error("Fail!");
           }
-        })
+        });
       },
       handleReset(name) {
         this.$refs[name].resetFields();
       },
       //
       getHomeInfo() {
-        let obj={
-          username:this.formValidate.username,
-          name:this.formValidate.name,
-          password:this.formValidate.password,
-          contactway:this.formValidate.contactway,
-          mail:this.formValidate.mail,
-          data:this.formValidate.date,
-          desc:this.formValidate.desc
-        }
-        axios.post("/api/Addteacherdata",obj)
+        let obj = {
+          username: this.formValidate.username,
+          name: this.formValidate.name,
+          password: this.formValidate.password,
+          contactway: this.formValidate.contactway,
+          mail: this.formValidate.mail,
+          data: this.formValidate.date,
+          desc: this.formValidate.desc
+        };
+        axios.post("/api/Addteacherdata", obj)
           .then((res) => this.getHomeInfoSucc(res));
       },
       getHomeInfoSucc(res) {
@@ -137,7 +138,6 @@
           this.$router.push({ path: "/about/TeacherManagementList" });
         }
       }
-
 
 
     }
@@ -150,7 +150,7 @@
         /*border: 1px solid red;*/
     }
 
-    .main{
+    .main {
         margin-top: -30px;
     }
 
@@ -162,7 +162,7 @@
     }
 
 
-    .TeacherManagementDate{
+    .TeacherManagementDate {
         display: flex;
         justify-content: space-evenly;
     }
