@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type="text/css">
+			<!-- body {
+				margin-left: 0px;
+				margin-top: 0px;
+				margin-right: 0px;
+				margin-bottom: 0px;
+				background-image: url(../images/left.gif);
+			}
+			-->
+		</style>
+		<link href="../css/css.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="../css/pintuer.css" />
+        <link rel="stylesheet" href="../css/admin.css" />
+        <script src="../js/jquery.js"></script>
+	</head>
+	<SCRIPT language=JavaScript>
+		function tupian(idt) {
+			var nametu = "xiaotu" + idt;
+			var tp = document.getElementById(nametu);
+			tp.src = "../images/ico05.gif"; //图片ico04为白色的正方形
+			for (var i = 1; i < 30; i++) {
+				var nametu2 = "xiaotu" + i;
+				if (i != idt * 1) {
+					var tp2 = document.getElementById('xiaotu' + i);
+					if (tp2 != undefined) {
+						tp2.src = "../images/ico06.gif";
+					} //图片ico06为蓝色的正方形
+				}
+			}
+		}
+
+		function list(idstr) {
+			var name1 = "subtree" + idstr;
+			var name2 = "img" + idstr;
+			var objectobj = document.all(name1);
+			var imgobj = document.all(name2);
+			//alert(imgobj);
+			if (objectobj.style.display == "none") {
+				for (i = 1; i < 10; i++) {
+					var name3 = "img" + i;
+					var name = "subtree" + i;
+					var o = document.all(name);
+					if (o != undefined) {
+						o.style.display = "none";
+						var image = document.all(name3);
+						//alert(image);
+						image.src = "../images/ico04.gif";
+					}
+				}
+				objectobj.style.display = "";
+				imgobj.src = "../images/ico03.gif";
+			} else {
+				objectobj.style.display = "none";
+				imgobj.src = "../images/ico04.gif";
+			}
+		}
+	</SCRIPT>
+
+	<body>
+		<!-- 个人信息 -->
+		<table width="198" border="0" cellpadding="0" cellspacing="0" class="left-table01">
+			<tr>
+				<td>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td width="207" height="55" background="../images/nav01.gif">
+								<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+									<tr>
+										<td width="25%" rowspan="2"><img src="../images/ico02.gif" width="35" height="35" /></td>
+										<td width="75%" height="22" class="left-font01">您好，<span class="left-font02">李四</span></td>
+									</tr>
+									<tr>
+										<td height="22" class="left-font01">
+											[&nbsp;<a href="../login.html" target="_top" class="left-font01">退出</a>&nbsp;]</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+                 <div class="leftnav">
+				          <h2>
+								<span class="icon-user"></span>教师管理
+							</h2>
+							<ul>
+								<li><a href="teacherRegister.html" target="mainFrame"><span
+										class="icon-caret-right"></span>添加教师</a></li>
+								<li><a href="teacherList.html" target="mainFrame"><span
+										class="icon-caret-right"></span>教师列表</a></li>
+							</ul>
+							<h2>
+								<span class="icon-user"></span>课程管理
+							</h2>
+							<ul>
+								<li><a href="addCourse.html" target="mainFrame"><span
+										class="icon-caret-right"></span>添加课程</a></li>
+								<li><a
+									href="courseList.html"
+									target="mainFrame"><span class="icon-caret-right"></span>课程列表</a></li>
+							</ul>
+							<h2>
+								<span class="icon-user"></span>学生管理
+							</h2>
+							<ul>
+								<li><a href="addStudent.html" target="mainFrame"><span
+										class="icon-caret-right"></span>添加学生</a></li>
+								<li><a href="studentList.html" target="mainFrame"><span
+										class="icon-caret-right"></span>学生列表</a></li>
+							</ul>
+							<h2>
+								<span class="icon-pencil-square-o"></span>管理员个人信息维护
+							</h2>
+							<ul>
+								<li><a href="adminInfo.html" target="mainFrame"><span
+										class="icon-caret-right"></span>编辑我的信息</a></li>
+							</ul>
+							<h2>
+								<span class="icon-pencil-square-o"></span>教师个人信息维护
+							</h2>
+							<ul>
+								<li><a href="teacherInfo.html" target="mainFrame"><span
+										class="icon-caret-right"></span>编辑我的信息</a></li>
+								<li><a href="scheduleList.html" target="mainFrame"><span
+										class="icon-caret-right"></span>我的任教课程</a></li>
+							</ul>
+							<h2>
+								<span class="icon-pencil-square-o"></span>学生个人信息维护
+							</h2>
+							<ul>
+								<li><a href="studentInfo.html" target="mainFrame"><span
+										class="icon-caret-right"></span>编辑我的信息</a></li>
+								<li><a href="courseSelectList.html" target="mainFrame"><span
+										class="icon-caret-right"></span>选课</a></li>
+								<li><a href="courseSelectedList.html" target="mainFrame"><span
+										class="icon-caret-right"></span>已选课程列表</a></li>
+							</ul>
+                  </div>
+				  <script type="text/javascript">
+					$(function() {
+						//默认二级菜单不显示
+						$(".leftnav ul").css("display","none");
+						$(".leftnav h2").click(function() {
+							$(this).next().slideToggle(200);
+							$(this).toggleClass("on");
+							//隐藏其它同辈h2下面的二级菜单
+							$(this).siblings("h2").next("ul").hide();
+						})
+						$(".leftnav ul li a").click(function() {
+							$("#a_leader_txt").text($(this).text());
+							$(".leftnav ul li a").removeClass("on");
+							$(this).addClass("on");
+						})
+					});
+				</script>
+				</td>
+			</tr>
+
+		</table>
+	</body>
+
+</html>
