@@ -7,7 +7,7 @@ module.exports = {
         const connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '123456',
+            password: 'qwer0219',
             database: 'iviewuipro'
         });
         //每次使用的时候需要创建链接，数据操作完成之后要关闭连接

@@ -207,7 +207,7 @@ router.get('/showtable', function (req, res, next) {
 })
 
 
-// 取出教师所有数据
+// 取出教师所有数据（分页查询）
 router.get('/teacherdata', function (req, res, next) {
 
     let offset= parseInt(req.query.offset)
@@ -224,6 +224,19 @@ router.get('/teacherdata', function (req, res, next) {
             })
         });
 
+    });
+})
+
+// 取出老师数据供选课下拉列表使用
+router.get('/teacherdataforcourse', function (req, res, next) {
+
+    db.query('select tname from t_teacher', [], function (result, fields) {
+        console.log(result);
+        return res.status(200).json({
+            err_code: 0,
+            message: 'OK',
+            result: result
+        })
     });
 })
 
@@ -439,6 +452,42 @@ router.get('/StudentAndClass', function (req, res, next) {
         })
     });
 })
+
+// 根据课程查出所有学生 ---
+router.post('/searchStudentformClass', function (req, res, next) {
+    console.log(req.body);
+    let cno= null
+    if (!req.body.cno){
+        cno = 1
+    }else{
+        cno = req.body.cno
+    }
+   
+    let selectsql = 'select * from  t_student s,t_class c WHERE s.classno = c.classno AND s.classno = ?'
+    let selectsqlParams = cno
+    db.query(selectsql, selectsqlParams, function (result, fields) {
+        return res.status(200).json({
+            err_code: 0,
+            message: 'OK',
+            result: result
+        })
+    });
+
+
+    // let deleteSql = 'DELETE FROM t_student  WHERE sno = ?';
+    // let deleteSqlParams = req.body.sno;
+    // db.query(deleteSql, deleteSqlParams, (err, results) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     return res.status(200).json({
+    //         err_code: 0,
+    //         message: 'OK'
+    //     })
+    // })
+})
+
+
 
 
 // 添加学生（t_class 多表查询 ）数据
