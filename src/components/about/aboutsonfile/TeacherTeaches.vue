@@ -49,7 +49,6 @@ export default {
         .then(res => this.getHomeInfoSucc(res));
     },
     getHomeInfoSucc(res) {
-
       if (res.data) {
         this.data1 = res.data.result;
       }

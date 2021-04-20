@@ -9,8 +9,12 @@
           </template>
         </Alert>
       </div>
+      <div class="rate">
+        <Rate allow-half v-model="valueHalf"></Rate>
+      </div>
 
       <div class="searchBox">
+        <p class="searchText">搜索框：</p>
         <Row>
           <i-col span="12" style="padding-right:10px;width:200px">
             <Select
@@ -35,6 +39,10 @@
     </div>
 
     <Divider> {{ label }} - 课程 -- 学生信息展示</Divider>
+    <h3 class="tips" style="color:#000">
+      选了 <span style="color:red">{{ label }}</span> 的的学生共
+      <span style="color:red">【 {{ data.length }} 】</span>人：如下图:
+    </h3>
 
     <div class="CourseListDiv">
       <Table stripe border :columns="columns1" :data="data"></Table>
@@ -98,7 +106,8 @@ export default {
       pageSize: 5,
       pageCurrent: 1,
       model11: 1,
-      label: "JAVA编程基础"
+      label: "JAVA编程基础",
+      valueHalf: 3
     };
   },
   methods: {
@@ -167,6 +176,16 @@ export default {
 }
 
 .searchBox {
+  display: flex;
+  align-items: center;
   padding-right: 100px;
+}
+.tips {
+  padding: 0px 0px 30px 25px;
+}
+
+.searchText {
+  font-size: 20px;
+  color: red;
 }
 </style>

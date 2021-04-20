@@ -14,7 +14,7 @@
       </List>
 
       <Button type="success" ghost to="/about/showtable"
-        >展示 t_admin 表</Button
+        >展示所有管理员信息</Button
       >
     </div>
     <!--active-name="4-1" :open-names="['4']"-->

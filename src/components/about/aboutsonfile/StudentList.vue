@@ -4,7 +4,7 @@
       <Button to="/about/AddStudent" type="dashed">添加学生信息</Button>
     </div>
 
-    <Divider>教师列表</Divider>
+    <Divider>学生列表</Divider>
     <div class="StudentListDiv">
       <Table :columns="columns" :data="data" border>
         <template slot="sno" slot-scope="{ row, index }">
@@ -179,13 +179,11 @@ export default {
       axios.get("/api/StudentAndClass").then(res => this.getHomeInfoSucc(res));
     },
     getHomeInfoSucc(res) {
-
       if (res.data) {
         this.data = res.data.result;
       }
     },
     show(index) {
-
       this.$Modal.info({
         title: "User Info",
         content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
